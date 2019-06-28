@@ -1,0 +1,136 @@
+#:import ScrollLabel custom.field.ScrollLabel
+#:import UsualCalculator usual.UsualCalculator
+#:import EllipticCalculator ellipticcalculator.EllipticCalculator
+#:import CalcTransition kivy.uix.screenmanager.SwapTransition
+#:import MainTransition kivy.uix.screenmanager.SlideTransition
+
+
+<MySettings>:
+    BoxLayout:
+        orientation: 'vertical'
+        FloatLayout:
+            size_hint_y: .08
+            canvas.before:
+                Color:
+                    rgba: app.color_scheme['toolbar']
+                Rectangle:
+                    pos: self.pos
+                    size: self.size
+
+            MDIconButton:
+                icon: 'arrow-left'
+
+                size_hint: None, 1
+                width: self.height
+
+                halign: 'center'
+                valign: 'center'
+                pos_hint: {'x': 0, 'center_y': .5}
+
+                md_bg_color: 1, 1, 1, 0
+
+                on_press:
+                    root.parent.transition.direction = 'right'
+                    root.parent.current = 'Calculator'
+            Label:
+                pos_hint: {'center_x': .5, 'center_y': .5}
+                text: 'Настройки'
+                font_size: self.height // 2.5
+
+            MDIconButton:
+                icon: 'help'
+                size_hint: None, 1
+                width: self.height
+
+                halign: 'center'
+                valign: 'center'
+                pos_hint: {'center_y': .5}
+                pos: root.width - self.width, self.pos[1]
+
+                md_bg_color: 1, 1, 1, 0
+
+
+
+
+        BoxLayout:
+            size_hint_y: .92
+
+
+<Tab>:
+    size_hint: 1,1
+    canvas.before:
+        Color:
+            rgba: self.bottom_line_color
+        Rectangle:
+            pos: self.pos
+            size: self.size[0], self.size[1] / 14
+    md_bg_color: 1, 1, 1, 0
+    on_press: root.parent.switch_tab(int(root.index))
+
+
+<TabsBar>:
+    on_parent:
+        self.on_create()
+    Tab:
+        icon: 'calculator'
+    Tab:
+        icon: 'vector-curve'
+
+
+<Calculator>:
+    scr_mang: scr_mang
+    topbar: topbar
+    topbar_container: topbar_container
+    BoxLayout:
+        topbar: topbar
+        id: topbar_container
+        orientation: 'vertical'
+
+        BoxLayout:
+            id: topbar
+            size_hint_y: .08
+
+            canvas.before:
+                Color:
+                    rgba: app.color_scheme['toolbar']
+                Rectangle:
+                    pos: self.pos
+                    size: self.size
+
+
+            TabsBar:
+                on_switch_tab:
+                    root.switch_screen(self.current_tab)
+
+
+            MDIconButton:
+                size_hint: None, 1
+                #width: self.height
+                halign: 'center'
+                valign: 'center'
+                md_bg_color: 1, 1, 1, 0
+                icon: 'settings'
+                on_press:
+                    root.parent.transition.direction = 'left'
+                    root.parent.current = 'Settings'
+
+        ScreenManager:
+            id: scr_mang
+            size_hint_y: .92
+            transition: CalcTransition()
+            Screen:
+                name: 'UsualCalculator'
+                UsualCalculator:
+            Screen:
+                name: 'EllipticCalculator'
+                EllipticCalculator:
+
+
+MainFrame:
+    calculator: calculator
+    transition: MainTransition()
+    Calculator:
+        id: calculator
+        name: 'Calculator'
+    MySettings:
+        name: 'Settings'

@@ -1,0 +1,177 @@
+#:import CustomFlatIconButton custom.button.CustomFlatIconButton
+#:import LongPressIconButton custom.button.LongPressIconButton
+<KeyboardMDFlatButton@MDFlatButton>:
+    size_hint: 1, 1
+    md_bg_color: app.color_scheme['keyboard-button']
+    font_size: self.height / 3.5
+
+
+<CustomFlatIconButton>:
+    size_hint: 1, 1
+    md_bg_color: app.color_scheme['keyboard-button']
+
+
+<MultiModeFlatButton>:
+    text: self.modes[0]
+    size_hint: 1, 1
+    font_size: self.height / 3.5
+
+
+
+<StoryRow>:
+    size_hint_y: None
+    Label:
+        text: root.text
+        font_size: root.height / 1.7
+        text_size: self.width, None
+        size: self.parent.size
+
+        max_lines: 1
+        shorten: True
+        shorten_from: 'left'
+
+        halign: 'right'
+        valign: 'top'
+
+    LongPressIconButton:
+        size_hint: None, 1
+        halign: 'center'
+        valign: 'center'
+        md_bg_color: 1, 1, 1, 0
+        icon:'content-copy'
+        on_short_press: root.parent.parent.copy(root)
+        on_long_press: root.parent.parent.copybody(root)
+
+
+<Story>:
+    container: container
+
+    scroll_y: 0
+    scroll_x: 1
+
+    BoxLayout:
+        id: container
+        size_hint_y: None
+        height: self.minimum_height
+        orientation: "vertical"
+        spacing: root.height / 25
+
+
+<UsualCalculator>:
+    story: story
+    entry: entry
+
+    orientation: 'vertical'
+
+    BoxLayout:
+        padding: 0, 0, 0, self.height / 10
+        size_hint_y: .22
+        Story:
+            id: story
+
+    ScrollLabel:
+        id: entry
+        anchor_x: 'right'
+        anchor_y: 'center'
+
+        text: '0'
+        size_hint_y: .08
+        scale_params: 10, .6
+        font_size: self.height / 1.1
+        padding: 1, self.height / 25
+
+    GridLayout:
+        canvas.before:
+            Color:
+                rgba: .15,.15,.17, 1
+            Rectangle:
+                pos: self.pos
+                size: self.size
+
+        cols: 5
+        size_hint_y: .7
+        padding: dp(3)
+        spacing: dp(3)
+
+        KeyboardMDFlatButton:
+            text: '^'
+            on_press: root.enter_operation(self)
+        KeyboardMDFlatButton:
+            text: 'mod'
+            on_press: root.enter_operation(self)
+        MultiModeFlatButton:
+            modes: ['φ(x)','F(N)']
+            md_bg_color: app.color_scheme['button']
+            on_short_press: root.enter_number(self)
+        KeyboardMDFlatButton:
+            text: 'x-¹'
+            on_press: root.enter_operation(self)
+        CustomFlatIconButton:
+            icon: 'backspace'
+            on_press: root.backspace()
+
+        KeyboardMDFlatButton:
+            text: '×'
+            on_press: root.enter_operation(self)
+        KeyboardMDFlatButton:
+            text: '7'
+            on_press: root.enter_number(self)
+        KeyboardMDFlatButton:
+            text: '8'
+            on_press: root.enter_number(self)
+        KeyboardMDFlatButton:
+            text: '9'
+            on_press: root.enter_number(self)
+        CustomFlatIconButton:
+            icon: 'delete-forever'
+            on_press: root.clear()
+
+        KeyboardMDFlatButton:
+            text: '÷'
+            on_press: root.enter_operation(self)
+        KeyboardMDFlatButton:
+            text: '4'
+            on_press: root.enter_number(self)
+        KeyboardMDFlatButton:
+            text: '5'
+            on_press: root.enter_number(self)
+        KeyboardMDFlatButton:
+            text: '6'
+            on_press: root.enter_number(self)
+        MultiModeFlatButton:
+            modes: ['НОД','НОК']
+            md_bg_color: app.color_scheme['button']
+            on_short_press: root.enter_number(self)
+
+        KeyboardMDFlatButton:
+            text: '+'
+            on_press: root.enter_operation(self)
+        KeyboardMDFlatButton:
+            text: '1'
+            on_press: root.enter_number(self)
+        KeyboardMDFlatButton:
+            text: '2'
+            on_press: root.enter_number(self)
+        KeyboardMDFlatButton:
+            text: '3'
+            on_press: root.enter_number(self)
+        CustomFlatIconButton:
+            icon: 'code-parentheses'
+            on_press: root.parentheses()
+
+        KeyboardMDFlatButton:
+            text: '-'
+            on_press: root.enter_operation(self)
+        KeyboardMDFlatButton:
+            text: ','
+            on_press: root.enter_operation(self)
+        KeyboardMDFlatButton:
+            text: '0'
+            on_press:root.enter_number(self)
+        KeyboardMDFlatButton:
+            text: '.'
+            on_press: root.enter_number(self)
+        CustomFlatIconButton:
+            icon: 'equal'
+            bg_color: app.color_scheme['button']
+            on_press: root.result()
