@@ -13,9 +13,14 @@ def take_degrees(dividers):
 
 
 def replacer(string):
-    replaces = {'НОД':'crypto.gcd', 'НОК':'crypto.lcm',
-                    'φ':'crypto.euler','F':'crypto.factorization',
-                    ' mod ': '%', '×':'*', '÷': '/', '^': '**'}
+    replaces = {'НОД':'crypto.gcd',
+                'НОК':'crypto.lcm',
+                'φ':'crypto.euler',
+                'F':'crypto.factorization',
+                ' mod ': '%',
+                '×':'*',
+                '÷': '/',
+                '^': '**'}
 
     result = string
     for text, func in replaces.items():
@@ -44,9 +49,11 @@ def factorization_handler(fct):
 
 def mod_operations_handler(string):
     buffer = tools.junk(string)
+
     i = 0
     while i < len(buffer):
-        if buffer[i] == '**' and (buffer[i+2] == '%' or buffer[i+2] == ')%'):
+        if len(buffer) >= i + 3 and buffer[i] == '**' and \
+                (buffer[i+2] == '%' or buffer[i+2] == ')%'):
             try:
                 A = int(buffer[i - 1])
                 POW = int(buffer[i + 1])

@@ -6,9 +6,7 @@ from kivy.uix.button import Button
 
 from kivymd.snackbars import Snackbar
 from kivymd.button import MDIconButton
-#from main import Window
 
-from plyer import storagepath
 
 try:
     import android
@@ -20,15 +18,12 @@ if android:
     from plyer.platforms.android import activity
 
 
-APK_FILE_PATH = storagepath.get_downloads_dir() + '/cryptculatorapp.apk'
-
-MAX_UPDATE_TRIES = 10
+APK_FILE_PATH = 'cryptculatorapp.apk'
 
 
 class Update:
     def __init__(self, App, Window):
         self.status = 'None'
-        self.tries = 0
         self.App = App
         self.Window = Window
 
@@ -36,21 +31,17 @@ class Update:
     def get_version(self):
         def version_request(request, result):
             self.App.git_version = str(result)
-            self.is_need_to_update()
+            if self.App.git_version:
+                if float(self.App.git_version[:3]) > float(self.App.version[:3]):
+                    self.App.update_available = True
+
+                elif float(self.App.git_version[:3]) == float(self.App.version[:3]):
+                    if float(self.App.git_version[4]) > float(self.App.version[4]):
+                        self.App.update_available = True
             self.process()
 
         version_url = "https://raw.githubusercontent.com/bugsbringer/Cryptculator-actual-APK/master/version.txt"
         UrlRequest(version_url, verify=False, on_success=version_request)
-
-
-    def is_need_to_update(self):
-        if self.App.git_version:
-            if float(self.App.git_version[:3]) > float(self.App.version[:3]):
-                self.App.update_available = True
-
-            elif float(self.App.git_version[:3]) == float(self.App.version[:3]):
-                if float(self.App.git_version[4]) > float(self.App.version[4]):
-                    self.App.update_available = True
 
 
     def start(self):

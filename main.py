@@ -1,11 +1,11 @@
-__version__ = '0.3.3'
+__version__ = '0.3.5'
 
 from kivy.app import App
 from kivy.lang.builder import Builder
 from kivy.uix.boxlayout import BoxLayout
 from kivy.properties import NumericProperty, ListProperty
 from kivy.uix.screenmanager import ScreenManager, Screen
-from kivy.config import Config
+
 
 from kivymd.theming import ThemeManager
 
@@ -20,7 +20,7 @@ except ImportError:
 
 if not android:
     from kivy.core.window import Window
-    W = 333
+    W = 335
     Window.size = (W, W * 16 / 9)
 
 
@@ -52,7 +52,7 @@ class TabsBar(BoxLayout):
     def color_control(self):
         for tab in self.children:
             if tab.index == self.current_tab:
-                tab.bottom_line_color[3] = .5
+                tab.bottom_line_color[3] = .8
             else:
                 tab.bottom_line_color[3] = 0
 

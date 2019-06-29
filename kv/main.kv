@@ -57,7 +57,7 @@
 
 
 <Tab>:
-    size_hint: 1,1
+    size_hint: 1, 1
     canvas.before:
         Color:
             rgba: self.bottom_line_color
@@ -103,16 +103,15 @@
                     root.switch_screen(self.current_tab)
 
 
-            MDIconButton:
-                size_hint: None, 1
-                #width: self.height
-                halign: 'center'
-                valign: 'center'
-                md_bg_color: 1, 1, 1, 0
-                icon: 'settings'
-                on_press:
-                    root.parent.transition.direction = 'left'
-                    root.parent.current = 'Settings'
+            #MDIconButton:
+                #size_hint: None, 1
+                #halign: 'center'
+                #valign: 'center'
+                #md_bg_color: 1, 1, 1, 0
+                #icon: 'settings'
+                #on_press:
+                    #root.parent.transition.direction = 'left'
+                    #root.parent.current = 'Settings'
 
         ScreenManager:
             id: scr_mang
@@ -121,9 +120,10 @@
             Screen:
                 name: 'UsualCalculator'
                 UsualCalculator:
-            Screen:
+            Screen
                 name: 'EllipticCalculator'
                 EllipticCalculator:
+
 
 
 MainFrame:

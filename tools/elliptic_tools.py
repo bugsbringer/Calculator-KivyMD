@@ -1,5 +1,15 @@
 from tools import crypto
 from tools import tools
+from tools.elliptic import EllipticCurve, Point
+
+def calculate(string, curve):
+    string = string.replace('(', 'Point(curve,')
+    try:
+        result = eval(string)
+    except:
+        return False
+    else:
+        return result
 
 def parse_curve_data(curve_data):
     data = tools.junk(curve_data)
@@ -14,4 +24,4 @@ def parse_curve_data(curve_data):
     a = int(data[2])
     b = int(data[4])
 
-    return (a, b), p
+    return EllipticCurve((a, b), p)

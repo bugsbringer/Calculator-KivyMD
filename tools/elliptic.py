@@ -15,6 +15,35 @@ def LegendreSymbol(a, p):
         return round(pow(-1, (p**2 - 1) / 8) * LegendreSymbol((a / 2), p))
 
 
+class Point:
+    def __init__(self, curve, x, y):
+        self.coords = (x, y)
+        self.curve = curve
+
+    def __neg__(self):
+        x, y = self.curve.invert(self.coords)
+        return Point(self.curve, x, y)
+
+    def __add__(self, other):
+        x,y = self.curve.sum(self.coords, other.coords)
+        return Point(self.curve, x, y)
+
+    def __sub__(self, other):
+        x, y = self.curve.sub(self.coords, other.coords)
+        return Point(self.curve, x, y)
+
+    def __mul__(self, other):
+        x, y = self.curve.mult(self.coords, other)
+        return Point(self.curve, x, y)
+
+    def __rmul__(self, other):
+        x, y = self.curve.mult(self.coords, other)
+        return Point(self.curve, x, y)
+
+    def __str__(self):
+        return str(self.coords)
+
+
 class EllipticCurve:
     def __init__(self, ab, p):
         if type(ab) != tuple:

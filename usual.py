@@ -99,6 +99,7 @@ class UsualCalculator(BoxLayout):
         if instance.text == '.':
             if lngh == 0:
                 buffer = '0.'
+
             else:
                 if self.entry_status[lngh - 1].isdigit():
                     for i in range(lngh - 2, -1, -1):
@@ -109,7 +110,8 @@ class UsualCalculator(BoxLayout):
 
                 else:
                     buffer = ''
-                    if self.entry_status[lngh - 1] == '.':
+                    if self.entry_status[lngh - 1] in self.operations or \
+                                            self.entry_status[lngh - 1] == '(':
                         buffer = '0.'
 
         elif buffer in self.functions:
@@ -149,6 +151,12 @@ class UsualCalculator(BoxLayout):
                 buffer = '×('
             else:
                 buffer = ')'
+
+        elif self.entry_status[lngh - 1:] == '.':
+            if left - right > 0:
+                buffer = '0)'
+            else:
+                buffer = '0'
 
         else:
             buffer = '('

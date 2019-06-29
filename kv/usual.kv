@@ -1,22 +1,5 @@
 #:import CustomFlatIconButton custom.button.CustomFlatIconButton
 #:import LongPressIconButton custom.button.LongPressIconButton
-<KeyboardMDFlatButton@MDFlatButton>:
-    size_hint: 1, 1
-    md_bg_color: app.color_scheme['keyboard-button']
-    font_size: self.height / 3.5
-
-
-<CustomFlatIconButton>:
-    size_hint: 1, 1
-    md_bg_color: app.color_scheme['keyboard-button']
-
-
-<MultiModeFlatButton>:
-    text: self.modes[0]
-    size_hint: 1, 1
-    font_size: self.height / 3.5
-
-
 
 <StoryRow>:
     size_hint_y: None
@@ -175,3 +158,20 @@
             icon: 'equal'
             bg_color: app.color_scheme['button']
             on_press: root.result()
+
+
+<KeyboardMDFlatButton@MDFlatButton>:
+    size_hint: 1, 1
+    md_bg_color: app.color_scheme['keyboard-button']
+    font_size: self.height / 3.5
+
+
+<CustomFlatIconButton>:
+    size_hint: 1, 1
+    md_bg_color: app.color_scheme['keyboard-button']
+
+
+<MultiModeFlatButton>:
+    text: self.modes[0]
+    size_hint: 1, 1
+    font_size: self.height / 3.5
