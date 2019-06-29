@@ -22,11 +22,10 @@ def replacer(string):
                 '÷': '/',
                 '^': '**'}
 
-    result = string
     for text, func in replaces.items():
-        result = result.replace(text, func)
+        string = string.replace(text, func)
 
-    return result
+    return string
 
 
 def factorization_handler(fct):

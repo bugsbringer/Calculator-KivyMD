@@ -29,23 +29,26 @@ class Update:
 
 
     def get_version(self):
-        def version_request(request, result):
+        def take_request(request, result):
             self.App.git_version = str(result)
-            if self.App.git_version:
-                if float(self.App.git_version[:3]) > float(self.App.version[:3]):
-                    self.App.update_available = True
-
-                elif float(self.App.git_version[:3]) == float(self.App.version[:3]):
-                    if float(self.App.git_version[4]) > float(self.App.version[4]):
-                        self.App.update_available = True
             self.process()
 
         version_url = "https://raw.githubusercontent.com/bugsbringer/Cryptculator-actual-APK/master/version.txt"
-        UrlRequest(version_url, verify=False, on_success=version_request)
+        UrlRequest(version_url, verify=False, on_success=take_request)
+
+    def check_version(self):
+        if self.App.git_version:
+            if float(self.App.git_version[:3]) > float(self.App.version[:3]):
+                self.App.update_available = True
+
+            elif float(self.App.git_version[:3]) == float(self.App.version[:3]):
+                if float(self.App.git_version[4]) > float(self.App.version[4]):
+                    self.App.update_available = True
 
 
     def start(self):
-        if android: #удаление старого апк файла
+        if android:
+            #удаление старого апк файла
             File = autoclass('java.io.File')
             apkFile = File(APK_FILE_PATH)
             apkFile.delete()
@@ -54,12 +57,13 @@ class Update:
 
 
     def process(self):
+        self.check_version()
 
         if self.App.update_available:
             self.snackbar = UpdateSnackBar(button_callback=self.download_update)
             self.snackbar.show()
             self.dwnld_bnt_clock = Clock.schedule_once(self.add_downloadbutton,
-                                                    self.snackbar.duration)
+                                                    self.snackbar.duration + .5)
 
 
     def add_downloadbutton(self, *args):
@@ -101,7 +105,7 @@ class UpdateSnackBar(Snackbar):
 
     text = "Доступно обновление"
     button_text = "Установить"
-    duration = 5
+    duration = 3
 
 
 class DownloadButton(MDIconButton):
