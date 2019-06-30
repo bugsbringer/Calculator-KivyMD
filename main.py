@@ -1,4 +1,4 @@
-__version__ = '0.3.3'
+__version__ = '0.3.5'
 
 from kivy.app import App
 from kivy.core.window import Window
@@ -20,7 +20,7 @@ except ImportError:
 
 if not android:
     W = 335
-    Window.size = (W, W * 16 / 9)
+    Window.size = (W, W * 15.471074 / 9) #15.471074 / 9 соотношение сторон не фулскрин приложения на андроид
 
 
 class Tab(CustomFlatIconButton):

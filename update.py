@@ -75,12 +75,16 @@ class Update:
         self.status = 'downloading'
         self.dwnld_bnt_clock.cancel()
         self.snackbar.duration = 0
-        Snackbar(text='Загрузка', duration=1).show()
+
+        self.downloading_snackbar = Snackbar(text='Загрузка', duration=20)
+        self.downloading_snackbar.show()
+
         url = "https://raw.githubusercontent.com/bugsbringer/Cryptculator-actual-APK/master/cryptculatorapp.apk"
         self.request = UrlRequest(url, on_success=self.install_update,
                                   verify=False, file_path=APK_FILE_PATH)
 
     def install_update(self, *args):
+        self.downloading_snackbar = 0
         if android:
 
             Intent = autoclass('android.content.Intent')
@@ -102,7 +106,7 @@ Builder.load_string(open("kv/update.kv", encoding='utf-8').read())
 class UpdateSnackBar(Snackbar):
     text = "Доступно обновление"
     button_text = "Установить"
-    duration = 2
+    duration = 3
 
 
 class DownloadButton(MDIconButton):
