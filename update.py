@@ -61,13 +61,8 @@ class Update:
         if self.App.update_available:
             self.snackbar = UpdateSnackBar(button_callback=self.download_update)
             self.snackbar.show()
-<<<<<<< HEAD
             self.dwnld_bnt_clock = Clock.schedule_once(self.add_download_button,
                                                     self.snackbar.duration + .5)
-=======
-            self.dwnld_bnt_clock = Clock.schedule_once(self.add_downloadbutton,
-                                                    self.snackbar.duration + .19)
->>>>>>> ef7c4282db333c57b13c8e7cd7e6faf5140c4285
 
 
     def add_download_button(self, *args):
