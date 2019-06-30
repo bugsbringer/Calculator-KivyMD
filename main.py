@@ -1,6 +1,7 @@
 __version__ = '0.3.3'
 
 from kivy.app import App
+from kivy.core.window import Window
 from kivy.lang.builder import Builder
 from kivy.uix.boxlayout import BoxLayout
 from kivy.properties import NumericProperty, ListProperty
@@ -19,7 +20,6 @@ except ImportError:
     android = None
 
 if not android:
-    from kivy.core.window import Window
     W = 335
     Window.size = (W, W * 16 / 9)
 

@@ -63,7 +63,7 @@ class Update:
             self.snackbar = UpdateSnackBar(button_callback=self.download_update)
             self.snackbar.show()
             self.dwnld_bnt_clock = Clock.schedule_once(self.add_downloadbutton,
-                                                    self.snackbar.duration + .5)
+                                                    self.snackbar.duration + .19)
 
 
     def add_downloadbutton(self, *args):
@@ -105,7 +105,7 @@ class UpdateSnackBar(Snackbar):
 
     text = "Доступно обновление"
     button_text = "Установить"
-    duration = 3
+    duration = 2
 
 
 class DownloadButton(MDIconButton):
