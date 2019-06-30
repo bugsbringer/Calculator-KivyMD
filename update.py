@@ -2,11 +2,10 @@ from kivy.clock import Clock
 from kivy.lang import Builder
 from kivy.network.urlrequest import UrlRequest
 
-from kivy.uix.button import Button
-
 from kivymd.snackbars import Snackbar
 from kivymd.button import MDIconButton
 
+from plyer import storagepath
 
 try:
     import android
@@ -18,7 +17,7 @@ if android:
     from plyer.platforms.android import activity
 
 
-APK_FILE_PATH = 'cryptculatorapp.apk'
+APK_FILE_PATH = storagepath.get_downloads_dir()+'/cryptculatorapp.apk'
 
 
 class Update:
@@ -26,7 +25,6 @@ class Update:
         self.status = 'None'
         self.App = App
         self.Window = Window
-
 
     def get_version(self):
         def callback(request, result):
@@ -46,24 +44,21 @@ class Update:
                 if float(self.App.git_version[4]) > float(self.App.version[4]):
                     self.App.update_available = True
 
-
     def start(self):
         if android:
-            #удаление старого апк файла
+            # удаление старого апк файла
             File = autoclass('java.io.File')
             apkFile = File(APK_FILE_PATH)
             apkFile.delete()
 
         self.get_version()
 
-
     def process(self):
         if self.App.update_available:
             self.snackbar = UpdateSnackBar(button_callback=self.download_update)
             self.snackbar.show()
             self.dwnld_bnt_clock = Clock.schedule_once(self.add_download_button,
-                                                    self.snackbar.duration + .5)
-
+                                                       self.snackbar.duration + .5)
 
     def add_download_button(self, *args):
         def callback(*args):
@@ -72,10 +67,9 @@ class Update:
 
         if self.status == 'None':
             self.download_button = DownloadButton(on_press=callback)
-            MainFrame_index = len(self.Window.children)-1
+            MainFrame_index = len(self.Window.children) - 1
             self.Window.children[MainFrame_index].calculator.ids.topbar.add_widget(
-                                                                self.download_button)
-
+                self.download_button)
 
     def download_update(self, *args):
         self.status = 'downloading'
@@ -84,11 +78,9 @@ class Update:
         Snackbar(text='Загрузка', duration=1).show()
         url = "https://raw.githubusercontent.com/bugsbringer/Cryptculator-actual-APK/master/cryptculatorapp.apk"
         self.request = UrlRequest(url, on_success=self.install_update,
-                                    verify=False, file_path=APK_FILE_PATH)
-
+                                  verify=False, file_path=APK_FILE_PATH)
 
     def install_update(self, *args):
-
         if android:
 
             Intent = autoclass('android.content.Intent')

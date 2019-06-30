@@ -11,12 +11,13 @@ Builder.load_string(open("kv/ellipticcalculator.kv", encoding='utf-8').read())
 
 store = DictStore("elliptic.data")
 
+
 class PatternTextInput(TextInput):
     multiline = False
     use_bubble = True
     name = StringProperty('')
     pat = StringProperty('')
-    border_color = ListProperty((1,.1,.1,0))
+    border_color = ListProperty((1, .1, .1, 0))
     created = False
 
     def delete_selection(self):
@@ -59,8 +60,8 @@ class PatternTextInput(TextInput):
 
 
 class EllipticCalculator(BoxLayout):
-    colors = {  'default': (1, .1, .1, 0),
-                'error': (1, 0, 0, .6)   }
+    colors = {'default': (1, 1, 1, 0),
+              'error': (1, 0, 0, .8)}
 
     def calculate(self):
         self.default_all()
@@ -85,7 +86,6 @@ class EllipticCalculator(BoxLayout):
                 return
 
         self.result.text = str(result)
-
 
     def error(self, instance):
 

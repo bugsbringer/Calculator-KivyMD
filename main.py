@@ -7,7 +7,6 @@ from kivy.uix.boxlayout import BoxLayout
 from kivy.properties import NumericProperty, ListProperty
 from kivy.uix.screenmanager import ScreenManager, Screen
 
-
 from kivymd.theming import ThemeManager
 
 from custom.button import CustomFlatIconButton

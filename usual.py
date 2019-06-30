@@ -39,7 +39,7 @@ class Story(ScrollView):
     def push(self, text, result):
         if text and result:
             self.container.add_widget(StoryRow(text=text, result=result,
-                                                height=self.height / 3))
+                                               height=self.height / 3))
 
     def clear(self):
         self.container.clear_widgets()
@@ -47,7 +47,7 @@ class Story(ScrollView):
 
 class UsualCalculator(BoxLayout):
     entry_status = '0'
-    ignored_items = ['0', 'Ошибка','Простое число']
+    ignored_items = ['0', 'Ошибка', 'Простое число']
     functions = ['НОД', 'НОК', 'φ', 'F']
     operations = ['+', '-', '÷', '×', ',', '^', 'mod ']
 
@@ -111,7 +111,7 @@ class UsualCalculator(BoxLayout):
                 else:
                     buffer = ''
                     if self.entry_status[lngh - 1] in self.operations or \
-                                            self.entry_status[lngh - 1] == '(':
+                            self.entry_status[lngh - 1] == '(':
                         buffer = '0.'
 
         elif buffer in self.functions:
@@ -208,7 +208,7 @@ class UsualCalculator(BoxLayout):
         self.refresh_entry()
 
     def refresh_entry(self):
-        if self.entry_status == '': # or self.entry_status == '()'
+        if self.entry_status == '':  # or self.entry_status == '()'
             self.entry_status = '0'
 
         self.entry.text = self.entry_status

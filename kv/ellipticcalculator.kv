@@ -1,15 +1,18 @@
 
 <PatternTextInput>:
+    foreground_color: 0,0,0,1
     canvas.after:
         Color:
             rgba: root.border_color
         Line:
-            rectangle: (self.pos[0], self.pos[1], self.size[0], self.size[1])
             width: self.size[1] / 30
+            rectangle: (self.pos[0]+self.size[1]*.03, self.pos[1]+self.size[1]*.03, self.size[0]-self.size[1]*.06, self.size[1]-self.size[1]*.06)
+
 
 
 
     font_size: self.height * .5
+    foreground_color: 0,0,0,1
 
 <EllipticCalculator>:
     curve_data: curve_data
