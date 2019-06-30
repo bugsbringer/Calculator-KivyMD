@@ -29,12 +29,13 @@ class Update:
 
 
     def get_version(self):
-        def take_request(request, result):
+        def callback(request, result):
             self.App.git_version = str(result)
+            self.check_version()
             self.process()
 
         version_url = "https://raw.githubusercontent.com/bugsbringer/Cryptculator-actual-APK/master/version.txt"
-        UrlRequest(version_url, verify=False, on_success=take_request)
+        UrlRequest(version_url, verify=False, on_success=callback)
 
     def check_version(self):
         if self.App.git_version:
@@ -57,25 +58,30 @@ class Update:
 
 
     def process(self):
-        self.check_version()
-
         if self.App.update_available:
             self.snackbar = UpdateSnackBar(button_callback=self.download_update)
             self.snackbar.show()
-            self.dwnld_bnt_clock = Clock.schedule_once(self.add_downloadbutton,
+            self.dwnld_bnt_clock = Clock.schedule_once(self.add_download_button,
                                                     self.snackbar.duration + .5)
 
 
-    def add_downloadbutton(self, *args):
+    def add_download_button(self, *args):
+        def callback(*args):
+            self.download_button.parent.remove_widget(self.download_button)
+            self.process()
+
         if self.status == 'None':
-            self.Window.children[1].calculator.ids.topbar.add_widget(
-                                    DownloadButton(on_press=self.download_update))
+            self.download_button = DownloadButton(on_press=callback)
+            MainFrame_index = len(self.Window.children)-1
+            self.Window.children[MainFrame_index].calculator.ids.topbar.add_widget(
+                                                                self.download_button)
 
 
     def download_update(self, *args):
         self.status = 'downloading'
         self.dwnld_bnt_clock.cancel()
         self.snackbar.duration = 0
+        Snackbar(text='Загрузка', duration=1).show()
         url = "https://raw.githubusercontent.com/bugsbringer/Cryptculator-actual-APK/master/cryptculatorapp.apk"
         self.request = UrlRequest(url, on_success=self.install_update,
                                     verify=False, file_path=APK_FILE_PATH)
@@ -102,10 +108,9 @@ Builder.load_string(open("kv/update.kv", encoding='utf-8').read())
 
 
 class UpdateSnackBar(Snackbar):
-
     text = "Доступно обновление"
     button_text = "Установить"
-    duration = 3
+    duration = 2
 
 
 class DownloadButton(MDIconButton):
