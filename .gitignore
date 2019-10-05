@@ -3,3 +3,6 @@ __pychache__
 *.apk
 *.cpython-37.pyc
 *.pyc
+*.zip
+*.rar
+*.gitignore

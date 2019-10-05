@@ -24,7 +24,7 @@ if not android:
 
 
 class Tab(CustomFlatIconButton):
-    index = NumericProperty('0')
+    index = NumericProperty(0)
     bottom_line_color = ListProperty((1, 1, 1, 0))
 
 
@@ -80,9 +80,9 @@ class CalculatorApp(App):
     theme_cls.theme_style = 'Dark'
 
     color_scheme = {
-        'button': (.6, .56, 1, .25),
-        'keyboard-button': (.9, .85, 1, .05),
-        'toolbar': (.6, .56, 1, .25),
+        'button':           (.6, .56, 1, .25),
+        'keyboard-button':  (.9, .85, 1, .05),
+        'toolbar':          (.6, .56, 1, .25),
     }
 
     version = __version__

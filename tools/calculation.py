@@ -32,22 +32,15 @@ def factorization_handler(fct):
     if not fct:
         return 'Простое число'
 
-    result = ''
     dividers, degrees = take_degrees(fct)
-    for divider, degree in zip(dividers, degrees):
-        if degree > 1:
-            result += str(divider) + '^' + str(degree) + ', '
-        else:
-            result += str(divider) + ', '
-
-    if result:
-        result = result[: len(result) - 2]
+    _, *result, _ = str( dict( zip(dividers, degrees) ) )
+    result = ''.join(result).replace(': ', '^').replace('^1','')
 
     return result
 
 
-def mod_operations_handler(string):
-    buffer = tools.junk(string)
+def mod_operations_handler(buffer):
+    buffer = tools.junk(buffer)
 
     i = 0
     while i < len(buffer):
@@ -61,9 +54,7 @@ def mod_operations_handler(string):
             except:
                 return 'Ошибка'
 
-            buffer[i - 1] = str(RESULT)
-            buffer.pop(i)
-            buffer.pop(i)
+            buffer[i - 1:i + 2] = str(RESULT)
 
         elif buffer[i] == '-¹mod ':
             try:
@@ -100,7 +91,7 @@ def calculate(text):
                 break
 
         if '-¹mod ' in buffer or ('**' in buffer and '%' in buffer):
-            buffer =  mod_operations_handler(buffer)
+            buffer = mod_operations_handler(buffer)
 
         try:
             if FUNC_BEFORE:
