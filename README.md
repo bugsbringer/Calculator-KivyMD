@@ -14,5 +14,5 @@ Features:
     - actions on points on an elliptic curve
 
 
-![Calculator in the field of integers](https://github.com/bugsbringer/Calculator-KivyMD/blob/master/data/screenshot_1.png)
-![elliptic curve calculator](https://github.com/bugsbringer/Calculator-KivyMD/blob/master/data/screenshot_2.png)
+![Calculator in the field of integers](https://github.com/bugsbringer/Calculator-KivyMD/blob/master/data/screenshot_android_1.png)
+![elliptic curve calculator](https://github.com/bugsbringer/Calculator-KivyMD/blob/master/data/screenshot_android_2.png)
