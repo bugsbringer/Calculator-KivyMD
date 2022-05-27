@@ -2,8 +2,9 @@ from kivy.lang import Builder
 from kivy.uix.anchorlayout import AnchorLayout
 from kivy.properties import StringProperty, NumericProperty
 
+
 Builder.load_string('''
-#:import TextfieldLabel kivymd.textfields.TextfieldLabel
+#:import TextfieldLabel kivymd.uix.textfield.TextfieldLabel
 <ScrollLabel>:
     scroller: scroller
     text_field: text_field
