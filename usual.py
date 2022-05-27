@@ -3,7 +3,7 @@ from kivy.uix.scrollview import ScrollView
 from kivy.properties import StringProperty, ListProperty
 from kivy.uix.boxlayout import BoxLayout
 
-from kivymd.button import MDFlatButton
+from kivymd.uix.button import MDFlatButton
 
 from custom.button import LongPressButton
 

@@ -1,6 +1,6 @@
 __version__ = '0.3.5'
 
-from kivy.app import App
+from kivymd.app import MDApp
 from kivy.core.window import Window
 from kivy.lang.builder import Builder
 from kivy.uix.boxlayout import BoxLayout
@@ -74,7 +74,7 @@ class MainFrame(ScreenManager):
         self.scr_mang.current = screen
 
 
-class CalculatorApp(App):
+class CalculatorApp(MDApp):
     title = 'Calculator'
     theme_cls = ThemeManager()
     theme_cls.theme_style = 'Dark'

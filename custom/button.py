@@ -3,12 +3,12 @@ from kivy.lang import Builder
 from kivy.uix.behaviors import ButtonBehavior
 from kivy.properties import StringProperty, ListProperty
 
-from kivymd.button import MDIconButton
-from kivymd.button import MDFlatButton
+from kivymd.uix.button import MDIconButton
+from kivymd.uix.button import MDFlatButton
 
 
 Builder.load_string('''
-#:import MDIcon kivymd.label.MDIcon
+#:import MDIcon kivymd.uix.label.MDIcon
 
 <CustomFlatIconButton>:
     mdicon:mdicon

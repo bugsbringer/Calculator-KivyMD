@@ -2,8 +2,8 @@ from kivy.clock import Clock
 from kivy.lang import Builder
 from kivy.network.urlrequest import UrlRequest
 
-from kivymd.snackbars import Snackbar
-from kivymd.button import MDIconButton
+from kivymd.uix.snackbar import Snackbar
+from kivymd.uix.button import MDIconButton
 
 from plyer import storagepath
 
